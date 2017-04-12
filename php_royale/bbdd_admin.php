@@ -60,14 +60,14 @@ function addCardToUser($user, $card) {
 	if ($num_rows == 0) {
 		$insert = "insert into deck values('$user', '$card','1')";
 		if (mysqli_query($con, $insert)) {
-			echo "<p>La carta card ha sido entragada a $user </p>";
+			echo "<p>La carta $card ha sido entragada a $user </p>";
 		} else {
 			echo mysqli_error($con);
 		}
 	} else {
 		$update = "update deck set level=level+1 where user='$user' and card='$card'";
 		if (mysqli_query($con,$update)) {
-			echo "<p> La Carta $card de $user sube un nivel </p>";
+			echo "<p> La carta $card de $user sube un nivel </p>";
 		} else {
 			mysqli_error($con);
 		}

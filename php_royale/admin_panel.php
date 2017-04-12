@@ -8,13 +8,19 @@ if (isset($_SESSION["user"])) {
 		<head>
 			<meta charset="UTF-8">
 			<title>Admin Panel</title>
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 		</head>
 		<body>
-			<h1>Admin Panel</h1>
-			<a href="altaCarta.php">Alta de Cartas</a><br>
-			<a href="userRanking.php">Ranking de mejores usuarios</a><br>
-			<a href="deleteUser.php">Borrar usuario</a><br>
-			<a href="addCard.php">Incorporar una carta a un usuario</a>
+			<div class="container">
+				<h1>Admin Panel</h1>
+				<ul>
+					<li><a href="altaCarta.php">Alta de Cartas</a></li>
+					<li><a href="userRanking.php">Ranking de mejores usuarios</a></li>
+					<li><a href="deleteUser.php">Borrar usuario</a></li>
+					<li><a href="addCard.php">Incorporar una carta a un usuario</a></li>
+					<li><a href="logout.php">Salir</a></li>
+				</ul>
+			</div>
 		</body>
 		</html>
 		<?php 

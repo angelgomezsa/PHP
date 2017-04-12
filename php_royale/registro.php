@@ -8,6 +8,7 @@
 <body>
 	<?php
     require_once 'bbdd_user.php';
+    require_once 'bbdd_admin.php';
     if (isset($_POST["reg"])) {
         $username = $_POST["username"];
         if (existUser($username)) {
@@ -19,6 +20,10 @@
                 echo "<p>Las contraseñas no coinciden. </p>";
             } else {
                 insertUser($username, $pass);
+                for ($i=0;$i<3;$i++) {
+                    addCardToUser($username, getCardNameByPos()); 
+                }
+                echo "<p><a href='index.php'>Volver</a></p>";
             }
         }
     } else {
@@ -49,7 +54,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-9">
-                                <input type="submit" class="btn btn-primary" name="reg" value="Enviar">
+                                <input type="submit" class="btn btn-primary" name="reg" value="Enviar"><a class="btn btn-default" href="index.php" style="margin-left: 6px">Volver</a>
                             </div>
                         </div>
                     </form>

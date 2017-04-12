@@ -60,7 +60,8 @@ function updatePassword($username, $pass) {
     $con = connect("royal");
     $update = "update user set password='$pass' where username='$username'";
     if (mysqli_query($con,$update)) {
-     echo "<p>Constraseña modificada</p>";
+    echo '<script>alert("Contraseña modificada")</script>';
+     //echo "<p>Constraseña modificada</p>";
  } else {
    mysqli_error($con);
 }
@@ -90,7 +91,7 @@ function getUserCardsByUsername($username) {
 
 function getBattleCard($username, $card) {
    $con = connect("royal");
-   $query = "select card.name, card.type, card.rarity, card.hitpoints+deck.level*2 hp, card.damage+deck.level*2 dmg, card.cost, deck.level 
+   $query = "select card.name, card.type, card.rarity, (card.hitpoints+deck.level)*2 hp, (card.damage+deck.level)*2 dmg, card.cost, deck.level 
    from card
    join deck on deck.card = card.name
    join user on deck.user = user.username
@@ -98,6 +99,52 @@ function getBattleCard($username, $card) {
    $res = mysqli_query($con, $query);
    disconnect($con);
    return $res;
+}
+
+function getNumberOfCards() {
+    $con = connect("royal");
+    $query = "select * from card";
+    $res = mysqli_query($con, $query);
+    $num_rows = mysqli_num_rows($res);
+    disconnect($con);
+    return $num_rows;
+}
+
+function getCardNameByPos() {
+    $con = connect("royal");
+    $rownum = rand(0,getNumberOfCards()-1);
+    $query = "select name from card limit 1 offset $rownum";
+    $res = mysqli_query($con, $query);
+    $row = mysqli_fetch_array($res);
+    disconnect($con);
+    return $row["name"];
+}
+
+function increaseUserLevel($username) {
+    $con = connect("royal");
+    $update = "update user set level=level+1 where username='$username'";
+    if (!mysqli_query($con, $update)) {
+        echo mysqli_error($con);
+    }
+    disconnect($con);
+}
+
+function increaseUserWins($username) {
+    $con = connect("royal");
+    $update = "update user set wins=wins+1 where username='$username'";
+    if (!mysqli_query($con, $update)) {
+        echo mysqli_error($con);
+    }
+    disconnect($con);
+}
+
+function getUserWinsByUsername($username) {
+    $con = connect("royal");
+    $query = "select wins from user where username='$username'";
+    $res = mysqli_query($con, $query);
+    $row = mysqli_fetch_array($res);
+    disconnect($con);
+    return $row["wins"];
 }
 
 ?>

@@ -23,7 +23,7 @@ if (isset($_SESSION["user"])) {
 					<div class="form-group">
 						<label class="col-sm-1 control-label">Usuario</label>
 						<div class="col-sm-3">
-							<select name="user" class="form-control" required>
+							<select name="username" class="form-control" required>
 								<option value="">Selecciona un usuario</option>
 								<?php
 								$users = selectAllUsernames();
